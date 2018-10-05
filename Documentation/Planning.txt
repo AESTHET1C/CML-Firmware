@@ -1,5 +1,0 @@
-Error codes:
-
-1: Endstop triggered early (encoder faulty?) - notice
-2: Endstop didn't trigger (endstop faulty?)  - notice
-3: Motor didn't move (motor jammed?)         - halt
