@@ -16,7 +16,6 @@
 #ifndef main_h
 #define main_h
 #include <arduino.h>
-#include <EEPROM.h>
 #include "src/power.h"
 #include "src/safety.h"
 
