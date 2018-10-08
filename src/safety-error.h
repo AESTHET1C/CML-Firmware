@@ -2,10 +2,13 @@
  *
  * Used to initialize and control the status LED to show error codes
  *
+ * This is a sub-module of the Safety Module.
+ *
  * Error codes are displayed by blinking the corresponding number of times to the error code.
  * If multiple errors are set, each error is displayed in increasing order.
- * The highest error code is a critical error. If it is set, all other errors are cleared,
- * and the status LED blinks constantly. All Firmware operation should be halted if this happens.
+ *
+ * Updating of the error code display is not handled automatically. handleErrorCodeDisplay() must
+ * be called frequently elsewhere to ensure the status LED is displaying error codes correctly.
  *
  * Each error code is displayed within a "cycle". Each cycle consists of ERROR_CODES "ticks".
  * Each tick lasts for ERROR_TICK_TIME milliseconds. At the beginning of each tick,

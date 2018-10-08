@@ -4,9 +4,9 @@
  *
  * This includes error code display and motor/encoder watchdog functionality.
  *
- * The Timer2 unit runs at approximately 61Hz, and once per cycle the error
- * code display is updated and the motor checked for movement. If the motor
- * is found to not be moving, the motor is haulted and an error is flagged.
+ * The Timer2 unit is used to regularly update the error code display and check encoder movement.
+ * It runs at approximately 61 Hz. If the motor is found to not be moving a sufficient amount
+ * between interrupts, the motor is haulted and an error is flagged.
  *
  * Written by Ana Tavares <tavaresa13@gmail.com>
  */
@@ -37,14 +37,40 @@ const byte WATCHDOG_THRESHOLD = 100;
 /////////////////////////
 
 void initWatchdog();
+/*
+ * Configures and initializes motor watchdog and error codes
+ * Should be called before using motor functions
+ */
 
 void enableWatchdog();
+/*
+ * Enables the motor watchdog
+ * Should be called by the Power Module immediately before enabling motor movement
+ *
+ * Affects Watchdog_Enabled, Watchdog_Queue[]
+ */
 
 void disableWatchdog();
+/*
+ * Disables the motor watchdog
+ * Should be called by the Power Module immediately before disabling motor movement
+ *
+ * Affects Watchdog_Enabled
+ */
 
 bool isFaulted();
+/*
+ * Returns true if motor is faulted
+ *
+ * OUTPUT: State of motor fault
+ */
 
 void clearFaults();
+/*
+ * Removes motor fault flag
+ *
+ * Affects Is_Faulted
+ */
 
 
 /////////////////////////
@@ -52,6 +78,15 @@ void clearFaults();
 /////////////////////////
 
 void raiseWatchdogError();
+/*
+ * Flags the motor as faulted and takes appropriate actions
+ * Used by the Timer2 overflow interrupt
+ *
+ * This includes halting the motor and flagging the appropriate error code for display.
+ *
+ * Affects Is_Faulted, Motor_Movement, Last_Motor_Disable, Last_Relay_Change, Motor_Enabled,
+ * Error_Status[3]
+ */
 
 
 #endif

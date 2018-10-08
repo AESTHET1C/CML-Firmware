@@ -10,6 +10,10 @@
  * The electromagnet automatically outputs at a higher duty cycle for a short while when enabled.
  * This is referred to as the "pulse".
  *
+ * The Timer1 unit is used to control the two power outputs in phase-correct PWM mode,
+ * running at about 122 Hz. In addition, the overflow interrupt is used to time the magnet
+ * pulse length. This interrupt is disabled when the pulse length has already been met.
+ *
  * Written by Ana Tavares <tavaresa13@gmail.com>
  */
 
@@ -22,7 +26,7 @@
 // CONFIGURATION VARIABLES
 /////////////////////////
 
-const byte MAGNET_PULSE_LENGTH = 25;  // Number of timer1 cycles (~244 Hz)
+const byte MAGNET_PULSE_LENGTH = 15;  // Number of timer1 cycles (~122 Hz)
 
 // PWM presets
 const uint8_t PWM_SPEED_SLOW = 75;
@@ -114,6 +118,7 @@ bool motorEnabled();
 void enablePulseCounter();
 /*
  * Enables the Timer1 overflow interrupt
+ * Used when the magnet is enabled by setMagnetOutput()
  *
  * This interrupt is used to count cycles for the electromagnet pulse.
  * It will reduce the duty cycle of the magnet when the pulse completes.
@@ -126,6 +131,7 @@ void enablePulseCounter();
 void disablePulseCounter();
 /*
  * Disables the Timer1 overflow interrupt
+ * Used by the Timer1 overflow interrupt
  *
  * This interrupt is used to count cycles for the electromagnet pulse.
  * If disabled, the electromagnet pulse will not terminate.
