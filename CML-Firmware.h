@@ -9,6 +9,8 @@
  * delays, motor watchdog functionality, and error code display, are automatically handled
  * externally and are therefore not required to be included in the main loop.
  *
+ * "Forward" involves the bucket moving away from its home position.
+ *
  * Written by Ana Tavares <tavaresa13@gmail.com>
  */
 
