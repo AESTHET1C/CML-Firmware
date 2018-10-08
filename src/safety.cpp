@@ -18,7 +18,7 @@ void initWatchdog() {
 }
 
 void enableWatchdog() {
-	long Temp_Queue_Value = getEncoderPos() - (0x80000000);  //TODO verify this operation works
+	long Temp_Queue_Value = getEncoderPos() - (0x80000000);
 	for(byte i = 0; i <= WATCHDOG_CYCLES; i++) {
 		Watchdog_Queue[i] = Temp_Queue_Value;
 	}

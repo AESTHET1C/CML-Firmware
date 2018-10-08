@@ -75,8 +75,6 @@ void initPowerOutputs();
  *
  * Initialization involves setting status variables, pin configuration, and PWM values.
  * Initial motor direction is also set.
- *
- * Affects TODO
  */
 
 void setMagnetOutput(bool enable);
