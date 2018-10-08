@@ -1,13 +1,12 @@
 /* Coal Mine Loader Firmware
  *
- * Allows for interactive control of the coal loader on the Eli Whitney Museum
- * seasonal train display
+ * Allows for interactive control of the coal loader on the Eli Whitney Museum seasonal train display
  *
  * See the documentation folder for details.
  *
  * A state machine is used to keep track of progress in the motor movement routine,
  * using non-blocking code. Several features, including electromagnet "pulsing", direction reversal
- * delays, motor watchdog, functionality, and error code display, are automatically handled
+ * delays, motor watchdog functionality, and error code display, are automatically handled
  * externally and are therefore not required to be included in the main loop.
  *
  * Written by Ana Tavares <tavaresa13@gmail.com>
